@@ -1,14 +1,25 @@
-cat <<EOF > .github/workflows/workflow.yml
-name: Lint Check
+name: CI Build and Test
+
 on: [push, pull_request]
+
 jobs:
-    lint:
+    build:
           runs-on: ubuntu-latest
                 steps:
-                        - uses: actions/checkout@v4
-                                - uses: actions/setup-node@v4
-                                          with:
-                                                      node-version: '20'
-                                                              - run: npm ci
-                                                                      - run: npm run lint
-                                                                        EOF
+                        - name: Checkout code
+                                  uses: actions/checkout@v4
+
+                                          - name: Set up Python
+                                                    uses: actions/setup-python@v5
+                                                              with:
+                                                                          python-version: '3.10'
+
+                                                                                  - name: Install dependencies
+                                                                                            run: |
+                                                                                                        pip install --upgrade pip
+                                                                                                                  pip install nose nose-spec
+                                                                                                                            # If you have a requirements file, use: pip install -r requirements.txt
+                                                                                                                            #
+                                                                                                                            #       - name: Run unit tests with nose
+                                                                                                                            #               run: nosetests -v --with-spec --spec-color test_cases.py
+                                                                                                                            #
