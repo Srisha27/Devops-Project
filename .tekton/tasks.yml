@@ -1,0 +1,7 @@
+- name: nose
+    image: python:3.9-slim
+        workingDir: $(workspaces.source.path)
+            script: |
+                  pip install nose nose-spec
+                      nosetests -v --with-spec --spec-color test_cases.py
+
