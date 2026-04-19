@@ -1,14 +1,8 @@
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: nose
-spec:
-  workspaces:
-    - name: source
-  steps:
-    - name: run-nose
-      image: python:3.9-slim
-      workingDir: $(workspaces.source.path)
-      script: |
-        pip install nose nose-spec
-        nosetests -v --with-spec --spec-color test_cases.py
+- name: cleanup
+    image: alpine:3.15
+        workingDir: $(workspaces.source.path)
+            script: |
+                  #!/bin/sh
+                  #    echo "Cleaning up workspace..."
+                  #        rm -rf *
+                  #
